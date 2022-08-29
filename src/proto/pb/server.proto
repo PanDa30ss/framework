@@ -1,0 +1,45 @@
+syntax = "proto2";
+option go_package = "../pb";
+
+package Server;
+
+enum CMD {
+        REQ_RegisterServer = 1;
+        RSP_RegisterServer = 2;
+        NTF_RegisterServer = 3;
+        REQ_RegisterRole = 4;
+        RSP_RegisterRole = 5;
+
+        //20000开始玩家消息
+        REQ_EnterGame = 20000;
+        PlayerStart = 20100; // 20000-20100预留 20100-40000直接转发
+        REQ_Test = 20101;
+        RSP_Test = 20102;
+
+
+        PlayerEnd   = 40000;
+}
+
+message Server{
+        optional uint32 ServerID        = 1;
+        optional bytes  Roles           = 2;
+        optional string Internal        = 3;
+}
+
+
+message ServerList
+{
+        repeated Server Servers = 1;
+}
+
+message Test
+{
+        optional uint32 ServerID        = 1;
+        
+}
+
+message EnterGame
+{
+        optional uint32 TestID        = 1;
+        
+}

@@ -1,0 +1,21 @@
+{
+	"serverID" : 2,
+	"zone" :1,
+	"http" : "127.0.0.1:8100",
+	"internal" : "127.0.0.1:8101",
+	"foreign" : "127.0.0.1:8102",
+	"gate" : true,
+	"record" : false,
+	"super" : false,
+	"session" : true,
+	"scene" : true,
+	"remoteSuper" : "127.0.0.1:8001",
+	"remoteSuperID" : 1,
+	"subTypes" : [],
+	"mysql" : "root:123456@tcp(127.0.0.1:3306)/mog",
+	"mysqlMaxConn" : 10,
+	"mysqlMaxIdle" : 5,
+	"redis" : "127.0.0.1:6379",
+	"redisMaxConn" : 0,
+	"redisMaxIdle" : 16
+}
