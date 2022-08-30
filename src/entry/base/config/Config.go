@@ -98,10 +98,12 @@ func (this *config) init() (ret bool) {
 	ret = true
 	return
 }
+
 func (this *config) initBaseModule() {
 	this.modules["tcpserver"] = true
 	this.modules["tcpclient"] = true
 	this.modules["http"] = true
+	this.modules["redisBank"] = true
 }
 
 func Register(role int) {
@@ -139,4 +141,22 @@ func GetBool(key string) bool {
 		}
 	}()
 	return GetInstance().data.MustKey(key).MustBool()
+}
+
+func GetRedis(key int) (string, int, int) {
+	defer func() {
+		if e := recover(); e != nil {
+			log.Error(e)
+		}
+	}()
+	for _, object := range GetInstance().data.MustKey("redis").MustArray() {
+		k := int(object.MustKey("key").MustNumeric())
+		if k == key {
+			addr := object.MustKey("addr").MustString()
+			maxConn := int(object.MustKey("maxConn").MustNumeric())
+			maxIdle := int(object.MustKey("maxIdle").MustNumeric())
+			return addr, maxConn, maxIdle
+		}
+	}
+	return "", 0, 0
 }

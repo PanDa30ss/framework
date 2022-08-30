@@ -9,9 +9,3 @@ func init() {
 	service.RegisterModule(moduleName, getInstance())
 
 }
-
-func moduleInit() {
-	cmdInit()
-	eventInit()
-	playerCMDInit()
-}

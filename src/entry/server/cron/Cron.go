@@ -10,39 +10,38 @@ import (
 	"github.com/PanDa30ss/core/timeUtil"
 )
 
-type rCron struct {
+type mCron struct {
 	service.Module
 	games  map[uint32]*tcpServer.ServerS
 	ticker *timeUtil.Ticker
 }
 
-var instance *rCron
+var instance *mCron
 var once sync.Once
 
-func getInstance() *rCron {
+func getInstance() *mCron {
 	once.Do(func() {
 		instance = makeInstance()
 	})
 	return instance
 }
 
-func makeInstance() *rCron {
-	ret := &rCron{}
+func makeInstance() *mCron {
+	ret := &mCron{}
 	ret.games = make(map[uint32]*tcpServer.ServerS)
 	return ret
 }
 
-func (this *rCron) Init() {
+func (this *mCron) Init() {
 	config.Register(config.Cron)
-	moduleInit()
 }
 
-func (this *rCron) Start() bool {
+func (this *mCron) Start() bool {
 	this.ticker = timeUtil.MakeTicker(1*time.Second, runTest, this)
 	return this.Module.Start()
 }
 
-func (this *rCron) Stop() {
+func (this *mCron) Stop() {
 	this.ticker.Stop()
 }
 

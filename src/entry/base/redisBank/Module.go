@@ -1,10 +1,10 @@
-package game
+package redisBank
 
 import "github.com/PanDa30ss/core/service"
 
 func init() {
 
-	moduleName := "game"
+	moduleName := "redisBank"
 
 	service.RegisterModule(moduleName, getInstance())
 

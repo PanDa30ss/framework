@@ -8,49 +8,48 @@ import (
 	"github.com/PanDa30ss/core/service"
 )
 
-type rGate struct {
+type mGate struct {
 	service.Module
 	playerBank *playerBank
 	games      map[uint32]*tcpServer.ServerS
 	players    map[uint32]*player
 }
 
-var instance *rGate
+var instance *mGate
 var once sync.Once
 
-func getInstance() *rGate {
+func getInstance() *mGate {
 	once.Do(func() {
 		instance = makeInstance()
 	})
 	return instance
 }
 
-func makeInstance() *rGate {
-	ret := &rGate{}
+func makeInstance() *mGate {
+	ret := &mGate{}
 	ret.games = make(map[uint32]*tcpServer.ServerS)
 	ret.playerBank = makePlayerBank()
 	ret.players = make(map[uint32]*player)
 	return ret
 }
 
-func (this *rGate) Init() {
-	moduleInit()
+func (this *mGate) Init() {
 	config.Register(config.Gate)
 	this.playerBank.Init(this.playerBank)
 	this.playerBank.BindAddr(config.GetString("foreign"))
 	this.playerBank.SetMaxSession(0x7FFFFFFF)
 }
 
-func (this *rGate) Start() bool {
+func (this *mGate) Start() bool {
 	this.playerBank.Start()
 	return this.Module.Start()
 }
 
-func (this *rGate) Stop() {
+func (this *mGate) Stop() {
 	this.playerBank.Close()
 }
 
-func (this *rGate) assignGameServer() uint32 {
+func (this *mGate) assignGameServer() uint32 {
 	for a, _ := range this.games {
 		return a
 	}

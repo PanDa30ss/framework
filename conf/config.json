@@ -9,9 +9,14 @@
 	"mysql" : "root:123456@tcp(127.0.0.1:3306)/mog",
 	"mysqlMaxConn" : 10,
 	"mysqlMaxIdle" : 5,
-	"redis" : "127.0.0.1:6379",
-	"redisMaxConn" : 0,
-	"redisMaxIdle" : 16,
-	"modules" : ["http","tcpserver","tcpclient","master","cron","game","gate"]
+	"redis" : [
+		{
+			"key" : 0,
+			"addr" : "192.168.50.157:18000",
+			"maxConn" : 0,
+			"maxIdle" : 16
+		}
+	],
+	"modules" : ["master","cron","game","gate"]
 	
 }
