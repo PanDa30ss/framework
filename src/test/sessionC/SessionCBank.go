@@ -1,10 +1,10 @@
 package main
 
 import (
+	"entry/base/proto/pb"
 	"fmt"
 	"os"
 	"os/signal"
-	"proto/pb"
 	"syscall"
 	"time"
 

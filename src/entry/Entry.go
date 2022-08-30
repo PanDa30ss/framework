@@ -1,11 +1,13 @@
 package main
 
 import (
-	"config"
+	"entry/base/config"
 
 	log "github.com/PanDa30ss/core/logManager"
 
-	_ "modules"
+	_ "entry/base/modules"
+	_ "entry/server/modules"
+
 	"os"
 	"os/signal"
 	"syscall"
