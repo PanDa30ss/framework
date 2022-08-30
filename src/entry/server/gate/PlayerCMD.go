@@ -1,6 +1,7 @@
 package gate
 
 import (
+	. "entry/base/proto"
 	. "entry/base/proto/pb"
 
 	"github.com/PanDa30ss/core/message"
@@ -60,7 +61,9 @@ func playerCmd(cmd int32) bool {
 			if !ok {
 				return true
 			}
-			game.SendMessage(makeGameMessage(cmd, s.(*player).playerId, msg))
+			head := MakeGate2GameHead()
+			head.PlayerID = s.(*player).playerId
+			game.SendMessage(makeGameMessage(cmd, head, msg))
 			return true
 		})
 }

@@ -1,7 +1,8 @@
 package game
 
 import (
-	"entry/base/proto/pb"
+	. "entry/base/proto"
+	. "entry/base/proto/pb"
 
 	"github.com/PanDa30ss/core/message"
 )
@@ -29,11 +30,15 @@ func (this *player) sendMessage(msg *message.Message) {
 	gate.SendMessage(msg)
 }
 
-func (this *player) sendPBMessage(cmd pb.CMD, err uint16, pkg interface{}) {
+func (this *player) sendPBMessage(cmd CMD, err uint16, pkg interface{}) {
+	head := MakeGame2GateHead()
+	head.PlayerID = this.playerID
+	head.Err = err
+
 	msg := message.MakeMessage()
 	msg.SetID(uint16(cmd))
-	msg.Write(this.playerID)
-	msg.Write(err)
+	head.Dump(msg)
+
 	if pkg != nil {
 		msg.Marshal(pkg)
 	}

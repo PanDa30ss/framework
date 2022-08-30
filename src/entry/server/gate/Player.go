@@ -1,6 +1,7 @@
 package gate
 
 import (
+	. "entry/base/proto"
 	"entry/base/proto/pb"
 	"fmt"
 
@@ -50,10 +51,10 @@ func (this *player) SendPBMessage(cmd pb.CMD, pkg interface{}) {
 	this.SendMessage(msg)
 }
 
-func makeGameMessage(cmd int32, playerId uint32, src *message.Message) *message.Message {
+func makeGameMessage(cmd int32, head *Gate2GameHead, src *message.Message) *message.Message {
 	gMsg := message.MakeMessage()
 	gMsg.SetID(uint16(cmd))
-	gMsg.Write(playerId)
+	head.Dump(gMsg)
 	gMsg.Write(src.GetBody())
 	gMsg.Done()
 	return gMsg

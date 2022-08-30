@@ -1,6 +1,7 @@
 package gate
 
 import (
+	. "entry/base/proto"
 	. "entry/base/proto/pb"
 	"entry/base/tcpServer"
 
@@ -14,11 +15,12 @@ func cmdInit() {
 			tcpServer.RegisterCMD(
 				CMD(key),
 				func(s tcp.ISession, msg *message.Message) bool {
-					playerID := msg.ReadUInt32()
-					if playerID == 0 {
+					head := MakeGame2GateHead()
+					head.Load(msg)
+					if head.PlayerID == 0 {
 						return true
 					}
-					p, ok := getInstance().players[playerID]
+					p, ok := getInstance().players[head.PlayerID]
 					if !ok {
 						return true
 					}
@@ -32,12 +34,12 @@ func cmdInit() {
 		CMD_RSP_EnterGame,
 		func(s tcp.ISession, msg *message.Message) bool {
 			session := s.(*tcpServer.ServerS)
-			playerID := msg.ReadUInt32()
-			err := msg.ReadUInt16()
-			if playerID == 0 {
+			head := MakeGame2GateHead()
+			head.Load(msg)
+			if head.PlayerID == 0 {
 				return true
 			}
-			p, ok := getInstance().players[playerID]
+			p, ok := getInstance().players[head.PlayerID]
 			if !ok {
 				return true
 			}
@@ -45,7 +47,7 @@ func cmdInit() {
 				return true
 			}
 
-			if err == 0 {
+			if head.Err == 0 {
 				p.status = 2
 			}
 			p.SendMessage(msg)
