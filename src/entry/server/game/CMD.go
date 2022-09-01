@@ -19,6 +19,7 @@ var _ = registerCMD(
 		msg.Unmarshal(pkg)
 		p := getInstance().players[playerID]
 		p.sendPBMessage(CMD_RSP_Test, 0, pkg)
+		getInstance().gameRedis.Query(redis.MakeRedisCommand(redisTest), "hgetall", "NAME_{00}")
 		return true
 	})
 
@@ -32,11 +33,12 @@ var _ = registerCMD(
 		p := getInstance().addPlayer(pkg.GetTestID())
 		p.gate = session.Data.ServerID
 		p.sendPBMessage(CMD_RSP_EnterGame, 0, pkg)
-		getInstance().gameRedis.Query(redis.MakeRedisCommand(redisTest), "hgetall", "NAME_{00}")
+
 		return true
 	})
 
 func redisTest(result *redis.RedisResult, params ...interface{}) {
-	a, _ := IntMap(result.Result, nil)
+	a, err := IntMap(result.Result, nil)
+	fmt.Println(err)
 	fmt.Println(a)
 }

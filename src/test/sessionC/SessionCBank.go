@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	// "time"
+	"time"
 
 	"github.com/PanDa30ss/core/message"
 	"github.com/PanDa30ss/core/service"
@@ -35,7 +35,7 @@ func (this *SessionC) OnOpen() {
 	pkg := &pb.EnterGame{}
 	pkg.TestID = &this.index
 	this.SendPBMessage(pb.CMD_REQ_EnterGame, pkg)
-	// this.ticker = timeUtil.MakeTicker(1*time.Second, runTest, this)
+	this.ticker = timeUtil.MakeTicker(1*time.Second, runTest, this)
 }
 func (this *SessionC) SendPBMessage(cmd pb.CMD, pkg interface{}) {
 	msg := message.MakePBMessage(uint16(cmd), pkg)
@@ -83,7 +83,7 @@ func main() {
 	bank.Init()
 	bank.Start()
 	var i uint32 = 0
-	for ; i < 1; i++ {
+	for ; i < 2048; i++ {
 		// for ; i < 10240; i++ {
 		session := newSessionC("127.0.0.1:9997")
 		session.index = i + 100
