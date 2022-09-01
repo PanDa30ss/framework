@@ -30,7 +30,6 @@ func makeInstance() *mHttp {
 }
 
 func (this *mHttp) Init() {
-	moduleInit()
 	this.server.Init(config.GetString("http"))
 }
 
