@@ -5,4 +5,5 @@ import (
 	_ "entry/server/game"
 	_ "entry/server/gate"
 	_ "entry/server/master"
+	_ "entry/server/web"
 )

@@ -85,9 +85,8 @@ func (this *config) init() (ret bool) {
 
 	this.modules = make(map[string]bool)
 	this.initBaseModule()
-	for _, object := range this.data.MustKey("modules").MustArray() {
-		this.modules[object.MustString()] = true
-	}
+	this.initModule()
+
 	this.Server = &Server{}
 	this.Server.Roles = make(map[uint8]bool)
 	this.Server.Internal = GetString("internal")
@@ -99,11 +98,16 @@ func (this *config) init() (ret bool) {
 	return
 }
 
+func (this *config) initModule() {
+	for _, object := range this.data.MustKey("modules").MustArray() {
+		this.modules[object.MustString()] = true
+	}
+}
+
 func (this *config) initBaseModule() {
-	this.modules["tcpserver"] = true
-	this.modules["tcpclient"] = true
-	this.modules["http"] = true
-	this.modules["redisBank"] = true
+	for _, object := range this.data.MustKey("baseModules").MustArray() {
+		this.modules[object.MustString()] = true
+	}
 }
 
 func Register(role int) {

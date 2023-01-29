@@ -3,11 +3,12 @@ package config
 import "entry/base/proto/pb"
 
 const (
-	Master     = iota // value --> 0
-	Cron              // value --> 1
-	GameServer        // value --> 2
-	Gate              // value --> 3
-	Count             // value --> 3
+	Master = iota
+	Cron
+	GameServer
+	Gate
+	Web
+	Count
 )
 
 type Server struct {
