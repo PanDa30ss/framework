@@ -17,6 +17,7 @@
 			"maxIdle" : 16
 		}
 	],
-	"modules" : ["master","cron","game","gate"]
+	"baseModules" : ["tcpserver","tcpclient","http","redisBank"],
+	"modules" : ["master","cron","game","gate","web"]
 	
 }
