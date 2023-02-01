@@ -52,3 +52,11 @@ func runTest(params ...interface{}) {
 	// 	gs.SendPBMessage(pb.CMD_Test11, pkg)
 	// }
 }
+
+func (this *mCron) Initial() {
+	initial()
+}
+
+func (this *mCron) CheckStart() bool {
+	return tcpServer.IsStarted()
+}

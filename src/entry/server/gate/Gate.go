@@ -45,8 +45,16 @@ func (this *mGate) Start() bool {
 	return this.Module.Start()
 }
 
+func (this *mGate) Initial() {
+	initial()
+}
+
 func (this *mGate) Stop() {
 	this.playerBank.Close()
+}
+
+func (this *mGate) CheckStart() bool {
+	return tcpServer.IsStarted()
 }
 
 func (this *mGate) assignGameServer() uint32 {

@@ -64,3 +64,7 @@ func Register(key int) *Redis {
 	getInstance().dbs[key] = r
 	return r
 }
+
+func IsStarted() bool {
+	return getInstance().IsStarted()
+}

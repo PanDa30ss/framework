@@ -6,16 +6,18 @@ import (
 	"github.com/PanDa30ss/core/event"
 )
 
-var _ = event.RegisterEventHandler(
-	tcpServer.EID_ServerSClose,
-	func(params ...interface{}) {
-		session := params[0].(*tcpServer.ServerS)
-		s, ok := getInstance().slaves[session.GetServerID()]
-		if !ok {
-			return
-		}
-		if s != session {
-			return
-		}
-		delete(getInstance().slaves, session.GetServerID())
-	})
+func eventInitial() {
+	event.RegisterEventHandler(
+		tcpServer.EID_ServerSClose,
+		func(params ...interface{}) {
+			session := params[0].(*tcpServer.ServerS)
+			s, ok := getInstance().slaves[session.GetServerID()]
+			if !ok {
+				return
+			}
+			if s != session {
+				return
+			}
+			delete(getInstance().slaves, session.GetServerID())
+		})
+}

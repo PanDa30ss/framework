@@ -41,5 +41,13 @@ func (this *mMaster) Start() bool {
 	return this.Module.Start()
 }
 
+func (this *mMaster) Initial() {
+	initial()
+}
+
 func (this *mMaster) Stop() {
+}
+
+func (this *mMaster) CheckStart() bool {
+	return tcpServer.IsStarted()
 }

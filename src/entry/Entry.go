@@ -30,6 +30,7 @@ func main() {
 		return
 	}
 	if !service.Start() {
+		log.Error("Start Fail")
 		return
 	}
 

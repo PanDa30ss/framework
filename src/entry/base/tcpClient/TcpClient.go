@@ -53,6 +53,10 @@ func (this *mTcpClient) Start() bool {
 	return this.Module.Start()
 }
 
+func (this *mTcpClient) Initial() {
+	initial()
+}
+
 func (this *mTcpClient) Stop() {
 	this.bank.Close()
 }
@@ -65,4 +69,8 @@ func AddClient(data *config.Server) *ServerC {
 		getInstance().bank.AddConnectSession(sc)
 	}
 	return sc
+}
+
+func IsStarted() bool {
+	return getInstance().IsStarted()
 }

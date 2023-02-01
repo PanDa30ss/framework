@@ -42,3 +42,11 @@ func (this *mTcpServer) Start() bool {
 func (this *mTcpServer) Stop() {
 	this.server.Close()
 }
+
+func (this *mTcpServer) Initial() {
+	initial()
+}
+
+func IsStarted() bool {
+	return getInstance().IsStarted()
+}

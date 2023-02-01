@@ -4,5 +4,10 @@ import (
 	"github.com/PanDa30ss/core/event"
 )
 
-var EID_ServerList = event.GetEventID()
-var EID_ServerCOpen = event.GetEventID()
+var EID_ServerList int
+var EID_ServerCOpen int
+
+func eventInitial() {
+	EID_ServerList = event.GetEventID()
+	EID_ServerCOpen = event.GetEventID()
+}

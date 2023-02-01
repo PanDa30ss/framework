@@ -40,6 +40,14 @@ func (this *mHttp) Start() bool {
 	return this.Module.Start()
 }
 
+func (this *mHttp) Initial() {
+	initial()
+}
+
+func IsStarted() bool {
+	return getInstance().IsStarted()
+}
+
 func (this *mHttp) register(url string, handleFunc http.HttpHandleFunc) bool {
 	return this.server.Register(url, handleFunc)
 }
