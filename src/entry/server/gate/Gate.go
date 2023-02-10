@@ -53,10 +53,6 @@ func (this *mGate) Stop() {
 	this.playerBank.Close()
 }
 
-func (this *mGate) CheckStart() bool {
-	return tcpServer.IsStarted()
-}
-
 func (this *mGate) assignGameServer() uint32 {
 	for a, _ := range this.games {
 		return a

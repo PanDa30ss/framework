@@ -4,7 +4,10 @@ import "github.com/PanDa30ss/core/service"
 
 func init() {
 
-	moduleName := "redisBank"
+	moduleName := "redisbank"
+
+	depends := []string{}
+	getInstance().SetDepends(depends)
 
 	service.RegisterModule(moduleName, getInstance())
 

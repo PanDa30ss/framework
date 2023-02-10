@@ -56,10 +56,6 @@ func (this *mGame) Initial() {
 func (this *mGame) Stop() {
 }
 
-func (this *mGame) CheckStart() bool {
-	return tcpClient.IsStarted() && redisBank.IsStarted()
-}
-
 func (this *mGame) addPlayer(playerID uint32) *player {
 	p, ok := this.players[playerID]
 	if ok {

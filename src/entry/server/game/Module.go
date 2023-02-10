@@ -6,6 +6,9 @@ func init() {
 
 	moduleName := "game"
 
+	depends := []string{"redisbank", "tcpclient"}
+	getInstance().SetDepends(depends)
+
 	service.RegisterModule(moduleName, getInstance())
 
 }

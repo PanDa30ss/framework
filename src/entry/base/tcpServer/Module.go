@@ -6,6 +6,9 @@ func init() {
 
 	moduleName := "tcpserver"
 
+	depends := []string{}
+	getInstance().SetDepends(depends)
+
 	service.RegisterModule(moduleName, getInstance())
 
 }

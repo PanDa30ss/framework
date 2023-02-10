@@ -8,6 +8,9 @@ func init() {
 
 	moduleName := "http"
 
+	depends := []string{}
+	getInstance().SetDepends(depends)
+
 	service.RegisterModule(moduleName, getInstance())
 
 }

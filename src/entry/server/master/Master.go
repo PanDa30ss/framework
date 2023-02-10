@@ -47,7 +47,3 @@ func (this *mMaster) Initial() {
 
 func (this *mMaster) Stop() {
 }
-
-func (this *mMaster) CheckStart() bool {
-	return tcpServer.IsStarted()
-}

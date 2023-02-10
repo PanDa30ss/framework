@@ -56,7 +56,3 @@ func runTest(params ...interface{}) {
 func (this *mCron) Initial() {
 	initial()
 }
-
-func (this *mCron) CheckStart() bool {
-	return tcpServer.IsStarted()
-}
